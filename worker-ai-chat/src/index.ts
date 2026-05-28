@@ -11,6 +11,10 @@
 
 import { sanitizeText } from './lib/validation.ts'
 
+interface Env {
+  GROQ_API_KEY: string
+}
+
 interface ChatRequest {
   message: string
 }
@@ -92,7 +96,7 @@ function buildCORSHeaders(): HeadersInit {
   }
 }
 
-async function handleChatRequest(request: Request): Promise<Response> {
+async function handleChatRequest(request: Request, env: Env): Promise<Response> {
   const corsHeaders = buildCORSHeaders()
 
   // CORS preflight
@@ -151,7 +155,7 @@ async function handleChatRequest(request: Request): Promise<Response> {
   }
 
   // Forward to Groq API
-  const groqApiKey = (globalThis as any).GROQ_API_KEY || ''
+  const groqApiKey = env.GROQ_API_KEY
   if (!groqApiKey) {
     return new Response(JSON.stringify({ error: 'AI service not configured' }), {
       status: 503,
@@ -200,7 +204,7 @@ async function handleChatRequest(request: Request): Promise<Response> {
 }
 
 export default {
-  async fetch(request: Request): Promise<Response> {
-    return handleChatRequest(request)
+  async fetch(request: Request, env: Env): Promise<Response> {
+    return handleChatRequest(request, env)
   },
 }
