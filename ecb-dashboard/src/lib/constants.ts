@@ -32,7 +32,7 @@ export const ECB_INDICATORS: ECBIndicator[] = [
     category: 'monetary',
   },
   {
-    key: 'MNA.Q.Y.I9.W2.S1.S1.B.B1GQ._Z._Z._Z.XDC.LR.G',
+    key: 'MNA.Q.Y.I9.W2.S1.S1.B.B1GQ._Z._Z._Z.XDC.LR.N',
     label: 'GDP - Gross Domestic Product',
     unit: 'EUR millions',
     description: 'Gross domestic product at market prices, euro area, chain linked volumes',
