@@ -1,13 +1,15 @@
-name = "eur-lex-ai-chat"
+name = "worker-ai-chat"
 main = "src/index.ts"
 compatibility_date = "2024-12-18"
 compatibility_flags = ["nodejs_compat"]
 
-[placement]
-mode = "smart"
-
 [env.production]
+account_id = "1e610bc9bf6087591f4244e2266e01d5"
 vars = { ENVIRONMENT = "production" }
 
 [env.preview]
+account_id = "1e610bc9bf6087591f4244e2266e01d5"
 vars = { ENVIRONMENT = "preview" }
+
+[placement]
+mode = "smart"

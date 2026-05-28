@@ -171,7 +171,7 @@ async function handleChatRequest(request: Request, env: Env): Promise<Response> 
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'llama3-8b-8192',
+        model: 'llama-3.3-70b-versatile',
         messages: [
           { role: 'system', content: buildSystemPrompt() },
           { role: 'user', content: sanitizedMessage },
