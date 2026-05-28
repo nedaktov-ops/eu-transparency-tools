@@ -1,0 +1,20 @@
+{
+  "name": "@euprojects/worker-ai-chat",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "build": "wrangler build",
+    "deploy": "wrangler deploy",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.202412.0",
+    "typescript": "^6.0.0",
+    "vitest": "^3.0.0",
+    "wrangler": "^3.99.0"
+  }
+}

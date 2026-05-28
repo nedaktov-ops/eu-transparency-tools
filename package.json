@@ -1,0 +1,7 @@
+{
+  "name": "eu-projects",
+  "private": true,
+  "version": "1.0.0",
+  "description": "EU Transparency Tool Dashboards",
+  "packageManager": "npm@10.8.2"
+}

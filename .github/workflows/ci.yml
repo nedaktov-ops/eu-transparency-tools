@@ -1,0 +1,84 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'docs/**'
+      - 'scripts/**'
+      - '**.md'
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  NODE_VERSION: '18'
+
+jobs:
+  test-ecb:
+    name: ECB Dashboard
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: ecb-dashboard
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: ecb-dashboard/package-lock.json
+
+      - run: npm ci
+      - run: npm run typecheck
+        continue-on-error: true
+      - run: npm run build
+
+  test-mep:
+    name: MEP Dashboard
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: mep-dashboard
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: mep-dashboard/package-lock.json
+
+      - run: npm ci
+      - run: npm run typecheck
+        continue-on-error: true
+      - run: npm run build
+
+  test-worker:
+    name: Worker AI Chat
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: worker-ai-chat
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+          cache-dependency-path: worker-ai-chat/package-lock.json
+
+      - run: npm ci
+      - run: npm run typecheck
+        continue-on-error: true
+      - run: npm test
+      - run: npm run build
